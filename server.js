@@ -48,5 +48,5 @@ app.post('/endpoint', async (req, res) => {
 // Start server using the environment variable for port
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
-    console.log(`Server running on http://localhost:${port}`);
+    console.log(`Server running...`);
 });
