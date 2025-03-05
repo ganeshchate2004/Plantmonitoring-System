@@ -1,9 +1,7 @@
-// Load environment variables from .env file
 require('dotenv').config();
-
 const express = require('express');
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
+const cors = require('cors');
 
 // MongoDB Atlas connection using environment variable
 mongoose.connect(process.env.MONGO_URI, {
@@ -25,7 +23,8 @@ const SensorData = mongoose.model('SensorData', sensorDataSchema);
 
 // Create Express app
 const app = express();
-app.use(bodyParser.json());
+app.use(cors()); // Use CORS
+app.use(express.json()); // Built-in JSON parsing middleware
 
 // POST endpoint to receive data
 app.post('/endpoint', async (req, res) => {
@@ -48,5 +47,5 @@ app.post('/endpoint', async (req, res) => {
 // Start server using the environment variable for port
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
-    console.log(`Server running...`);
+    console.log(`Server running on http://localhost:${port}`);
 });
